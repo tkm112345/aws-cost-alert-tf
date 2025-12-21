@@ -1,0 +1,21 @@
+# CODEOWNERS file for aws-cost-alert-tf
+#
+# This file defines individuals or teams that are responsible for code in this repository.
+# Code owners are automatically requested for review when someone opens a pull request.
+#
+# Learn more about CODEOWNERS: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners - These users will be requested for review for all changes
+* @tkm112345
+
+# Terraform configuration files
+*.tf @tkm112345
+*.tfvars.example @tkm112345
+
+# Documentation
+README.md @tkm112345
+*.md @tkm112345
+
+# Infrastructure critical files
+.gitignore @tkm112345
+.terraform.lock.hcl @tkm112345
