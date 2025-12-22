@@ -1,29 +1,29 @@
 variable "email_address" {
-    description = "Email address for alert notifications"
-    type        = string
-    default     = "your-actual-email@example.com"
+  description = "Email address for alert notifications"
+  type        = string
+  default     = "your-actual-email@example.com"
 }
 
 variable "budget_amount" {
-    description = "Monthly budget limit (USD)"
-    type        = string
-    default     = "8.00"
+  description = "Monthly budget limit (USD)"
+  type        = string
+  default     = "8.00"
 }
 
 variable "project_name" {
-    description = "Watch AWS Cost"
-    type        = string
-    default     = "aws-cost-watch"
+  description = "Watch AWS Cost"
+  type        = string
+  default     = "aws-cost-watch"
 }
 
 variable "environment" {
-    description = "Environment name (dev, staging, prod, personal, etc.)"
-    type = string
-    default = "personal"
+  description = "Environment name (dev, staging, prod, personal, etc.)"
+  type        = string
+  default     = "personal"
 }
 
 variable "sns_topic_name" {
-    description = "SNS topic name"
-    type        = string
-    default     = "cost-alert-topic"
+  description = "SNS topic name"
+  type        = string
+  default     = "cost-alert-topic"
 }

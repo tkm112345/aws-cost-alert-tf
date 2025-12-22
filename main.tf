@@ -65,19 +65,49 @@ resource "aws_budgets_budget" "monthly_cost_budget" {
 
   # Alert when forecast exceeds 80% of budget
   notification {
-      comparison_operator = "GREATER_THAN"
-      threshold = 80
-      threshold_type = "PERCENTAGE"
-      notification_type = "FORECASTED"
-      subscriber_sns_topic_arns = [aws_sns_topic.cost_alert.arn]
+    comparison_operator       = "GREATER_THAN"
+    threshold                 = 80
+    threshold_type            = "PERCENTAGE"
+    notification_type         = "FORECASTED"
+    subscriber_sns_topic_arns = [aws_sns_topic.cost_alert.arn]
   }
 
   # Alert when forecast exceeds 100% of budget
   notification {
-      comparison_operator = "GREATER_THAN"
-      threshold = 100
-      threshold_type = "PERCENTAGE"
-      notification_type = "ACTUAL"
-      subscriber_sns_topic_arns = [aws_sns_topic.cost_alert.arn]
+    comparison_operator       = "GREATER_THAN"
+    threshold                 = 100
+    threshold_type            = "PERCENTAGE"
+    notification_type         = "ACTUAL"
+    subscriber_sns_topic_arns = [aws_sns_topic.cost_alert.arn]
   }
+}
+
+# =============================================================================
+# SNS Topic Policy to allow AWS Budgets to publish messages
+# =============================================================================
+resource "aws_sns_topic_policy" "cost_alert_policy" {
+  arn = aws_sns_topic.cost_alert.arn
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "AWSBudgetsSNSPublishingPermissions",
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "budgets.amazonaws.com"
+        },
+        "Action" : "SNS:Publish",
+        "Resource" : aws_sns_topic.cost_alert.arn,
+        "Condition" : {
+          "StringEquals" : {
+            "aws:SourceAccount" : data.aws_caller_identity.current.account_id
+          },
+          "ArnLike" : {
+            "aws:SourceArn" : "arn:aws:budgets::${data.aws_caller_identity.current.account_id}:*"
+          }
+        }
+      }
+    ]
+  })
 }
