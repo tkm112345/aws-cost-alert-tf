@@ -68,7 +68,8 @@ aws-cost-alert-terraform/
 email_address = "your-email@example.com"
 
 # 月次予算上限（USD）
-budget_amount = "8.00"
+budget_amount_1 = "8.00"
+budget_amount_2 = "20.00"
 
 # プロジェクト名（リソース名のプレフィックス）
 project_name = "aws-cost-watch"
@@ -88,7 +89,7 @@ sns_topic_name = "cost-alert-topic"
 
 ```hcl
 # terraform.tfvars に記載
-budget_amount = "15.00"  # デフォルトの $8.00 から変更
+budget_amount_1 = "15.00"  # デフォルトの $8.00 から変更
 ```
 
 - ✅ **推奨**: `terraform.tfvars` で値を上書き
@@ -123,7 +124,8 @@ nano terraform.tfvars
 
 ```hcl
 email_address = "your-actual-email@gmail.com"  # ← ここを変更
-budget_amount = "8.00"
+budget_amount_1 = "8.00"
+budget_amount_2 = "20.00"
 project_name = "aws-cost-watch"
 environment = "personal"
 sns_topic_name = "cost-alert-topic"

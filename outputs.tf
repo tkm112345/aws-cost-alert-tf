@@ -20,11 +20,24 @@ output "subscription_arn" {
 }
 
 # Budget Outputs
-output "budget_name" {
-  description = "Name of the created budget"
-  value       = aws_budgets_budget.monthly_cost_budget.name
+output "budget_name_1" {
+  description = "Name of the created the first budget"
+  value       = aws_budgets_budget.monthly_cost_budget_1.name
+}
+output "budget_limit_amount_1" {
+  description = "Limit amount of the first budget (USD)"
+  value       = aws_budgets_budget.monthly_cost_budget_1.limit_amount
 }
 
+output "budget_name_2" {
+  description = "Name of the created the second budget"
+  value       = aws_budgets_budget.monthly_cost_budget_2.name
+}
+
+output "budget_limit_amount_2" {
+  description = "Limit amount of the second budget (USD)"
+  value       = aws_budgets_budget.monthly_cost_budget_2.limit_amount
+}
 # Additional useful outputs for production monitoring
 output "aws_account_id" {
   description = "AWS Account ID where resources are created"
